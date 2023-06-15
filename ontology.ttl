@@ -1,0 +1,534 @@
+@prefix : <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/DMO> rdf:type owl:Ontology ;
+                                                          owl:versionIRI <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#childTxn
+:childTxn rdf:type owl:ObjectProperty ;
+          rdfs:domain :NestedTxn ;
+          rdfs:range :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#distributes
+:distributes rdf:type owl:ObjectProperty ;
+             rdfs:domain :TxnOuput ;
+             rdfs:range :Asset .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#hasAsset
+:hasAsset rdf:type owl:ObjectProperty ;
+          rdfs:domain :MKTxn ;
+          rdfs:range :Asset .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#hasInput
+:hasInput rdf:type owl:ObjectProperty ;
+          rdfs:domain :MKTxn ;
+          rdfs:range :TxnInput .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#hasOutput
+:hasOutput rdf:type owl:ObjectProperty ;
+           rdfs:domain :MKTxn ;
+           rdfs:range :TxnOuput .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#hasSig
+:hasSig rdf:type owl:ObjectProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain :TxnInput ;
+        rdfs:range :Signature .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#hasSysAcc
+:hasSysAcc rdf:type owl:ObjectProperty ;
+           rdfs:domain :PromiseTxn ;
+           rdfs:range :SysAccount .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#msgTxn
+:msgTxn rdf:type owl:ObjectProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain :MKTxn ;
+        rdfs:range :Signature .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#objEndurantFeature
+:objEndurantFeature rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#objPredurantFeature
+:objPredurantFeature rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#outputCond
+:outputCond rdf:type owl:ObjectProperty ;
+            rdfs:domain :TxnOuput ;
+            rdfs:range :Condition .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#receiver
+:receiver rdf:type owl:ObjectProperty ;
+          rdfs:domain :TxnOuput ;
+          rdfs:range :Account .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#refTxn
+:refTxn rdf:type owl:ObjectProperty ;
+        rdfs:domain :MKTxn ;
+        rdfs:range :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#sender
+:sender rdf:type owl:ObjectProperty ;
+        rdfs:domain :TxnInput ;
+        rdfs:range :Account .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#sigCond
+:sigCond rdf:type owl:ObjectProperty ;
+         rdfs:domain :Signature ;
+         rdfs:range :Condition .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#sigGeneratedBy
+:sigGeneratedBy rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :Signature ;
+                rdfs:range :Account .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#spends
+:spends rdf:type owl:ObjectProperty ;
+        rdfs:domain :TxnInput ;
+        rdfs:range :TxnOuput .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#assetId
+:assetId rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :Asset ;
+         rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#assetMetadata
+:assetMetadata rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#numOfShare
+:numOfShare rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:positiveInteger ;
+            rdfs:comment "remove or check it it's equal to the output of creat tx" .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#numShare
+:numShare rdf:type owl:DatatypeProperty ;
+          rdfs:domain :TxnOuput ;
+          rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#opName
+:opName rdf:type owl:DatatypeProperty ;
+        rdfs:domain :MKTxn ;
+        rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#privateKey
+:privateKey rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Account ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#publicKey
+:publicKey rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Account ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#sigHash
+:sigHash rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Signature ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#txnId
+:txnId rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
+       rdfs:domain :MKTxn ;
+       rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#txnInputId
+:txnInputId rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :TxnInput ;
+            rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#txnOutputId
+:txnOutputId rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :TxnOuput ;
+             rdfs:range xsd:int .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#AcceptBid
+:AcceptBid rdf:type owl:Class ;
+           rdfs:subClassOf :NestedTxn ,
+                           :TransferringTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Account
+:Account rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Advertise
+:Advertise rdf:type owl:Class ;
+           rdfs:subClassOf :NonTransferringTxn ,
+                           :SimpleTxn ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :refTxn ;
+                             owl:someValuesFrom :Create
+                           ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Asset
+:Asset rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Bid
+:Bid rdf:type owl:Class ;
+     rdfs:subClassOf :PromiseTxn ,
+                     :SimpleTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Buy
+:Buy rdf:type owl:Class ;
+     rdfs:subClassOf :NestedTxn ,
+                     :TransferringTxn ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :refTxn ;
+                       owl:someValuesFrom :Advertise
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasInput ;
+                       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                       owl:onClass :TxnInput
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasOutput ;
+                       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                       owl:onClass :TxnOuput
+                     ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Condition
+:Condition rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Create
+:Create rdf:type owl:Class ;
+        rdfs:subClassOf :NonTransferringTxn ,
+                        :SimpleTxn ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasInput ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :TxnInput
+                        ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Destroy
+:Destroy rdf:type owl:Class ;
+         rdfs:subClassOf :NonTransferringTxn ,
+                         :SimpleTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#FungibleAsset
+:FungibleAsset rdf:type owl:Class ;
+               rdfs:subClassOf :Asset .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#MKTxn
+:MKTxn rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasAsset ;
+                         owl:someValuesFrom :Asset
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasInput ;
+                         owl:someValuesFrom :TxnInput
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasOutput ;
+                         owl:someValuesFrom :TxnOuput
+                       ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#NestedTxn
+:NestedTxn rdf:type owl:Class ;
+           rdfs:subClassOf :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#NonFungibleAsset
+:NonFungibleAsset rdf:type owl:Class ;
+                  rdfs:subClassOf :Asset .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#NonTransferringTxn
+:NonTransferringTxn rdf:type owl:Class ;
+                    rdfs:subClassOf :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Offer
+:Offer rdf:type owl:Class ;
+       rdfs:subClassOf :NonTransferringTxn ,
+                       :SimpleTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#PromiseTxn
+:PromiseTxn rdf:type owl:Class ;
+            rdfs:subClassOf :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Refund
+:Refund rdf:type owl:Class ;
+        rdfs:subClassOf :NestedTxn ,
+                        :TransferringTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Request
+:Request rdf:type owl:Class ;
+         rdfs:subClassOf :NonTransferringTxn ,
+                         :SimpleTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Return
+:Return rdf:type owl:Class ;
+        rdfs:subClassOf :SimpleTxn ,
+                        :TransferringTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Signature
+:Signature rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#SimpleTxn
+:SimpleTxn rdf:type owl:Class ;
+           rdfs:subClassOf :MKTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#SysAccount
+:SysAccount rdf:type owl:Class ;
+            rdfs:subClassOf :Account .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Transfer
+:Transfer rdf:type owl:Class ;
+          rdfs:subClassOf :SimpleTxn ,
+                          :TransferringTxn .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#TransferringTxn
+:TransferringTxn rdf:type owl:Class ;
+                 rdfs:subClassOf :MKTxn ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasOutput ;
+                                   owl:someValuesFrom :TxnOuput
+                                 ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#TxnInput
+:TxnInput rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :sender ;
+                            owl:someValuesFrom :Account
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasSig ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Signature
+                          ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#TxnOuput
+:TxnOuput rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :receiver ;
+                            owl:someValuesFrom :Account
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :opName ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#TxnWorkflow
+:TxnWorkflow rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#UserAccount
+:UserAccount rdf:type owl:Class ;
+             rdfs:subClassOf :Account .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#Withdraw
+:Withdraw rdf:type owl:Class ;
+          rdfs:subClassOf :SimpleTxn ,
+                          :TransferringTxn .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#z> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#y> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasOutput ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#z> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox1>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Transfer ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :NestedTxn ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasOutput ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasOutput ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#y> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox2>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasOutput ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ox2>
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Transfer ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#z>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasInput ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#y> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix1>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasInput ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#z> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasInput ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix1>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasInput ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ix2>
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#propertyPredicate> :childTxn ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#y>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :childTxn ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#z>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest rdf:nil
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Buy ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/
